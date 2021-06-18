@@ -7,6 +7,8 @@ using System;
 using PruebaIngresoBibliotecario.DBContext;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
+using System.Text.RegularExpressions;
 
 namespace PruebaIngresoBibliotecario.Api.Controllers
 {
@@ -16,47 +18,38 @@ namespace PruebaIngresoBibliotecario.Api.Controllers
     {
         private readonly PersistenceContext ctx;
 
-
+        /// <summary>
+        /// Asignacion del contexto para poder manejar los datos en memoria
+        /// </summary>
+        /// <param name="context"></param>
         public PrestamoController(PersistenceContext context)
         {
             ctx = context;
         }
 
-
+        /// <summary>
+        /// Funcion que permite ingresar un nuevo prestamo a la biblioteca
+        /// </summary>
+        /// <param name="nuevo">Contiene la nueva entidad a ingresar</param>
+        /// <returns>Mensaje de informacion</returns>
         [HttpPost]
-        [Route("prestamo")]
-        public ActionResult prestamo([FromBody] PrestamosE nuevo)
+        public async Task<IActionResult> prestamo([FromBody] PrestamosE nuevo)
         {
             PrestamoB miPrestamoB = new PrestamoB();
-
-            if (nuevo.identificacionUsuario.Length>10)
-                return new  OkObjectResult(new { StatusCode=400, Message = "La identificacionUsuario debe ser maximo de 10." });
-
-            nuevo.fechaMaximaDevolucion = miPrestamoB.obtenerFechaEntrega(nuevo.tipoUsu);
-
-            using (ctx)
-            {
-                PrestamosE presta = ctx.Prestamos.Where(x => x.Id == nuevo.Id).FirstOrDefault();
-                if (presta != null)
-                    return new OkObjectResult(new { StatusCode = 400, Message = String.Join("El usuario con identificacion {0} ya tiene un libro prestado por lo cual no se le puede realizar otro prestamo", nuevo.identificacionUsuario) });
-
-                ctx.Prestamos.Add(nuevo);
-                ctx.SaveChanges();
-                return new OkObjectResult(new { StatusCode = 200, Message = "id : {0} , fechaMaximaDevolucion {1}",nuevo.Id, nuevo.fechaMaximaDevolucion });
-
-            }
+            return await miPrestamoB.CrearPrestamo(ctx, nuevo);
         }
 
+        /// <summary>
+        /// Funcion para buscar un prestamo en la biblioteca 
+        /// </summary>
+        /// <param name="Id"> Identificador del prestamo</param>
+        /// <returns>Mensaje de informacion</returns>
         [HttpGet]
-        [Route("prestamo/{Id-prestamo}")]
-        public ActionResult prestamo(Guid Id)
+        [Route("{idPrestamo}")]
+        public async Task<ActionResult> prestamo(string idPrestamo)
         {
             PrestamoB miPrestamoB = new PrestamoB();
-            List<string> datos = miPrestamoB.tieneprestado(ctx.Prestamos.ToList(), Id);
-            if(datos != null)
-                return new OkObjectResult(new { StatusCode = datos[0], Message = datos[1] });
-            else
-                return new OkObjectResult(new { StatusCode = 404, Message = string.Format("El prestamo con id {0} no existe", Id ) });
+            return await miPrestamoB.TienePrestado(ctx, idPrestamo);
         }
 
     }

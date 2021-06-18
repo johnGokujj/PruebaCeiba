@@ -8,6 +8,11 @@ namespace PruebaIngresoBibliotecario.DBContext.Data
 {
     public static class DBInitializer
     {
+        /// <summary>
+        /// Inicia llenando la Bases de datos y llenandola con algunos datos
+        /// Fue creado con el fin de realizar las pruebas iniciales por medio de Postman
+        /// </summary>
+        /// <param name="serviceProvider"></param>
         public static void Init(IServiceProvider serviceProvider)
         {
             try
@@ -18,9 +23,9 @@ namespace PruebaIngresoBibliotecario.DBContext.Data
                         return;
 
                     _context.Prestamos.AddRange(
-                        new Entities.PrestamosE { isbn = new Guid(), identificacionUsuario = "goku123", tipoUsu = 1 , Id = new Guid("bec109ba-48bd-4393-bb4a-b3ca8c7aebad"), fechaMaximaDevolucion = new DateTime()},
-                        new Entities.PrestamosE { isbn = new Guid(), identificacionUsuario = "vegeta123", tipoUsu = 2, Id = new Guid(), fechaMaximaDevolucion = new DateTime() },
-                        new Entities.PrestamosE { isbn = new Guid(), identificacionUsuario = "sayayin123", tipoUsu = 3, Id = new Guid(), fechaMaximaDevolucion = new DateTime() }
+                        new Entities.PrestamosE { Isbn = Guid.NewGuid().ToString(), IdentificacionUsuario = "goku123", TipoUsuario = TipoUsuarioPrestamo.AFILIADO , Id = "bec109ba-48bd-4393-bb4a-b3ca8c7aebad", FechaMaximaDevolucion = new DateTime()},
+                        new Entities.PrestamosE { Isbn = Guid.NewGuid().ToString(), IdentificacionUsuario = "vegeta123", TipoUsuario = TipoUsuarioPrestamo.EMPLEADO, Id = Guid.NewGuid().ToString(), FechaMaximaDevolucion = new DateTime() },
+                        new Entities.PrestamosE { Isbn = Guid.NewGuid().ToString(), IdentificacionUsuario = "sayayin123", TipoUsuario = TipoUsuarioPrestamo.INVITADO, Id = Guid.NewGuid().ToString(), FechaMaximaDevolucion = new DateTime() }
                         );
 
                     _context.SaveChanges();
@@ -28,7 +33,7 @@ namespace PruebaIngresoBibliotecario.DBContext.Data
                 }
 
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return;
             }

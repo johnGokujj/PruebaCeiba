@@ -7,6 +7,8 @@ using System;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using PruebaIngresoBibliotecario.DBContext;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 
 namespace PruebaIngresoBibliotecario.Api
 {
@@ -34,7 +36,8 @@ namespace PruebaIngresoBibliotecario.Api
 
             services.AddControllers(mvcOpts =>
             {
-            });
+            });//.AddNewtonsoftJson(opts => opts.SerializerSettings.Converters.Add(new StringEnumConverter()));
+
 
         }
 

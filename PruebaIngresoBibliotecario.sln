@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaIngresoBibliotecario.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaIngresoBibliotecario.Api.Tests", "PruebaIngresoBibliotecario\PruebaIngresoBibliotecario.Api.Tests\PruebaIngresoBibliotecario.Api.Tests.csproj", "{1098EFDF-6E71-42AB-B02C-EE86D21BC08F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaIngresoBibliotecario.Business", "PruebaIngresoBibliotecario.Business\PruebaIngresoBibliotecario.Business.csproj", "{A890C466-54DA-451E-949D-2B41139A054D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PruebaIngresoBibliotecario.Entities", "PruebaIngresoBibliotecario.Entities\PruebaIngresoBibliotecario.Entities.csproj", "{3F5DA8A9-68A4-43F2-AF86-B80F6DDEBB17}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{1098EFDF-6E71-42AB-B02C-EE86D21BC08F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1098EFDF-6E71-42AB-B02C-EE86D21BC08F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1098EFDF-6E71-42AB-B02C-EE86D21BC08F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A890C466-54DA-451E-949D-2B41139A054D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A890C466-54DA-451E-949D-2B41139A054D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A890C466-54DA-451E-949D-2B41139A054D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A890C466-54DA-451E-949D-2B41139A054D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3F5DA8A9-68A4-43F2-AF86-B80F6DDEBB17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3F5DA8A9-68A4-43F2-AF86-B80F6DDEBB17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F5DA8A9-68A4-43F2-AF86-B80F6DDEBB17}.Release|Any CPU.ActiveCfg = Release|Any CPU
